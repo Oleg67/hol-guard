@@ -95,6 +95,43 @@ Older releases are preserved in the [changelog archive](docs/changelog-archive.m
 * **native:** a package-intent parse now sends the caller's `PATH` to the resident. The resident is long-lived, so its own `PATH` is the one it was spawned with; a manager it cannot resolve (`npx` from a test or tool directory) made the TypeScript launch evidence incomplete and sent a contained typecheck back to review even though the caller resolved the manager fine.
 * **native:** a resident that answers a context-digest request with its own error envelope is now reported by that code — and recorded against the resilience breaker — instead of being flattened into `native_context_digest_result_invalid`. An envelope outside the contract keeps its code in the rejection reason, and a rejected result names the contract clause that rejected it with the offending keys, so a foreign frame, a stale frame and a truncated read are no longer indistinguishable.
 
+## [3.53.0](https://github.com/hashgraph-online/hol-guard/compare/v3.52.0...v3.53.0) (2026-10-21)
+
+
+### Features
+
+* **dashboard:** lighten the Rules header, style every select, and prove the page end to end ([4d41a60](https://github.com/hashgraph-online/hol-guard/commit/4d41a60081ea3314888cdcdb60961134de0f22db))
+* **extensions:** add command.envseal for EnvSeal CLI v6.2.1 ([#4148](https://github.com/hashgraph-online/hol-guard/issues/4148)) ([d281dae](https://github.com/hashgraph-online/hol-guard/commit/d281daecdfc3a2e463bdfb42208672cab5c5e535))
+* **guard:** add command.simgit extension ([#2930](https://github.com/hashgraph-online/hol-guard/issues/2930)) ([c9fb1c3](https://github.com/hashgraph-online/hol-guard/commit/c9fb1c37284d980bd7182a742864d040af37ebda))
+* **guard:** plan saved-approval reuse in the resident ([#5475](https://github.com/hashgraph-online/hol-guard/issues/5475)) ([7ad65c5](https://github.com/hashgraph-online/hol-guard/commit/7ad65c50be4486122a166ed0f6e3a87480143e89))
+* **mcp-servers:** add garmin-coach-mcp MCP contribution ([#5267](https://github.com/hashgraph-online/hol-guard/issues/5267)) ([b1bd8f7](https://github.com/hashgraph-online/hol-guard/commit/b1bd8f7576749a87da36b532c581f72875cc3117))
+* **mcp:** add AXPilot MCP server contribution ([#5431](https://github.com/hashgraph-online/hol-guard/issues/5431)) ([8e5f3a0](https://github.com/hashgraph-online/hol-guard/commit/8e5f3a07a0134ea2b4dcfc56926a29544248ea8d))
+
+
+### Bug Fixes
+
+* **ci:** keep the merge freeze accurate across check suites and dispatched runs ([#5465](https://github.com/hashgraph-online/hol-guard/issues/5465)) ([4c347e1](https://github.com/hashgraph-online/hol-guard/commit/4c347e1361522d069c5e3a1f8b7440b58d43b9ba))
+* **dashboard:** keep the extensions page usable while Guard settles a catalog ([#5507](https://github.com/hashgraph-online/hol-guard/issues/5507)) ([399f89a](https://github.com/hashgraph-online/hol-guard/commit/399f89a956bfcd340bbc4f2db84b286902bcb1f4))
+* **extensions:** repair a split catalog binding instead of refusing to load ([#5485](https://github.com/hashgraph-online/hol-guard/issues/5485)) ([c2da623](https://github.com/hashgraph-online/hol-guard/commit/c2da623a3088c2e4d39e06f352de90f2d0a53326))
+* **guard:** enroll a command-pack floor on an install that never had one ([#5488](https://github.com/hashgraph-online/hol-guard/issues/5488)) ([4a8b371](https://github.com/hashgraph-online/hol-guard/commit/4a8b37196db8e3f06ca61ff2a5772469d045aeda))
+* **guard:** link every command extension end to end in the Review Inbox ([#5481](https://github.com/hashgraph-online/hol-guard/issues/5481)) ([da63aff](https://github.com/hashgraph-online/hol-guard/commit/da63aff5845ba76ea19d5c6c3a0a5db4abeb216b))
+* **guard:** report user-wide inventory without workspace context and stop retrying permanent review quarantines ([#5477](https://github.com/hashgraph-online/hol-guard/issues/5477)) ([4e734b8](https://github.com/hashgraph-online/hol-guard/commit/4e734b8f0c5db337228ac34bf4e38e174ac6d12c))
+* **guard:** retry a lost WAL index race instead of failing the operation ([#5461](https://github.com/hashgraph-online/hol-guard/issues/5461)) ([aafc814](https://github.com/hashgraph-online/hol-guard/commit/aafc814a98df34faf1cd5f02a66c2ff334ecd39f))
+* **native:** apply the Extra careful risk-action floor in Rust ([#5473](https://github.com/hashgraph-online/hol-guard/issues/5473)) ([59f95ce](https://github.com/hashgraph-online/hol-guard/commit/59f95ce445efdb2ed6ce95741557e4ad76636891))
+* **pretool:** keep the Windows drive proof on the part of a git target that exists ([#5490](https://github.com/hashgraph-online/hol-guard/issues/5490)) ([bfae84f](https://github.com/hashgraph-online/hol-guard/commit/bfae84f20bdfbae96420262bd5fea305c7d54fbc))
+* **resident:** wait for an exiting owner before spawning on Windows ([#5494](https://github.com/hashgraph-online/hol-guard/issues/5494)) ([4fbafd7](https://github.com/hashgraph-online/hol-guard/commit/4fbafd737c505c2b26653493aacc62e50ecd43d1))
+* **secure-fs:** classify a source inside a linked workspace by its target ([#5500](https://github.com/hashgraph-online/hol-guard/issues/5500)) ([002f3f5](https://github.com/hashgraph-online/hol-guard/commit/002f3f5677fd8dafd50164a18aff965bd9a069db))
+
+
+### Performance Improvements
+
+* **guard:** prove the npm an install will run in the resident ([#5478](https://github.com/hashgraph-online/hol-guard/issues/5478)) ([41a96ac](https://github.com/hashgraph-online/hol-guard/commit/41a96ac3b985f1d99cb8e5ce2f84c5ed2b06ba5a))
+
+
+### Documentation
+
+* **guard:** record the artifact hook decisions the resident now answers ([#5491](https://github.com/hashgraph-online/hol-guard/issues/5491)) ([25c7614](https://github.com/hashgraph-online/hol-guard/commit/25c76143ab970236da6fd4ea90b91cd41db9643a))
+
 ## [3.52.0](https://github.com/hashgraph-online/hol-guard/compare/v3.51.0...v3.52.0) (2026-10-21)
 
 
